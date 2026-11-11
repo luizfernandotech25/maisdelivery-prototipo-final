@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="estilo.css">
+  <title>Mais Delivery — Protótipo Final Unificado (Fase 7 — Grupo Leko)</title>
+</head>
+
+<body>
+  <div class="page-header">
+    <h1>Protótipo Clicável — Mais Delivery</h1>
+  </div>
+
+  <div class="layout">
+
+    <div class="phone">
+      <div class="phone-screen" id="phone-screen">
+
+        <!-- ==================== HOME ==================== -->
+        <section class="screen active" id="screen-home" data-tab="inicio">
+          <header class="app-header">
+            <span style="font-size:12px;color:var(--primary);">📍 Buriti Alegre</span>
+            <div class="app-logo">Mais+Delivery</div>
+            <button class="icon-btn" title="Minha Conta" onclick="showScreen('screen-profile')">👤<br><span
+                style="font-size:9px;">Minha Conta</span></button>
+          </header>
+          <div class="app-content">
+            <div class="search-bar">🔍 Buscar estabelecimento ou produto favorito</div>
+
+            <div class="banner-box" style="font-size:16px;padding:20px;">☕ Café fresquinho<br>na sua porta!</div>
+
+            <h2 class="section-title">👑 Queridinhos</h2>
+            <div class="queridinhos-row">
+              <div class="q-card">
+                <div class="thumb"></div>Marmita completa<div class="price">R$ 25,00</div>
+              </div>
+              <div class="q-card">
+                <div class="thumb"></div>X-tudo<div class="price">R$ 30,00</div>
+              </div>
+              <div class="q-card">
+                <div class="thumb"></div>X-bacon especial<div class="price">R$ 28,00</div>
+              </div>
+              <div class="q-card">
+                <div class="thumb"></div>X-salada simples<div class="price">R$ 22,00</div>
+              </div>
+            </div>
+
+            <h2 class="section-title">Estabelecimentos</h2>
+            <div class="filters-row">
+              <div class="filter-pill filled">🟢 Abertos Agora</div>
+              <div class="filter-pill">☰ Segmentos</div>
+            </div>
+
+            <div class="store-card" onclick="abrirEstabelecimento('pizzaria')">
+              <div class="thumb"></div>
+              <div>
+                <p class="name">Pizzaria da Nena</p>
+                <p class="meta">Pizzaria · 30-40 min · R$ 3,00 a 5,00</p>
+                <span class="badge-cashback">💰 CashBack</span>
+                <span class="badge-aberto">ABERTO</span>
+              </div>
+              <span class="rating">⭐ 5,00</span>
+            </div>
+
+            <div class="store-card" onclick="abrirEstabelecimento('mercearia')">
+              <div class="thumb"></div>
+              <div>
+                <p class="name">Mercearia Leve Mais</p>
+                <p class="meta">Mercearia · 20-30 min · R$ 3,00</p>
+                <span class="badge-cashback">💰 CashBack</span>
+                <span class="badge-aberto">ABERTO</span>
+              </div>
+              <span class="rating">⭐ 5,00</span>
+            </div>
+
+            <div class="store-card" onclick="abrirEstabelecimento('bigvariedades')">
+              <div class="thumb"></div>
+              <div>
+                <p class="name">Big Variedades</p>
+                <p class="meta">Variedades · 10-15 min · R$ 5,99 a 9,99</p>
+                <span class="badge-cashback">💰 CashBack</span>
+                <span class="badge-aberto">ABERTO</span>
+              </div>
+              <span class="rating">⭐ 4,80</span>
+            </div>
+
+            <div class="store-card" onclick="abrirEstabelecimento('distribuidora')">
+              <div class="thumb"></div>
+              <div>
+                <p class="name">Distribuidora Dois Corações</p>
+                <p class="meta">Bebidas · 15-20 min · R$ 3,00 a 5,00</p>
+                <span class="badge-cashback">💰 CashBack</span>
+                <span class="badge-aberto">ABERTO</span>
+              </div>
+              <span class="rating">⭐ 3,17</span>
+            </div>
+
+            <div class="store-card" onclick="abrirEstabelecimento('confeitaria')">
+              <div class="thumb"></div>
+              <div>
+                <p class="name">Confeitaria Gourmet JT</p>
+                <p class="meta">Bolos e doces · 20-30 min · R$ 5,00 a 8,00</p>
+                <span class="badge-cashback">💰 CashBack</span>
+                <span class="badge-aberto">ABERTO</span>
+              </div>
+              <span class="rating">⭐ 4,47</span>
+            </div>
+          </div>
+          <nav class="bottom-nav">
+            <button class="nav-item active" data-tab="inicio" onclick="showScreen('screen-home',{reset:true})"><span
+                class="emoji">🏠</span>Início</button>
+            <button class="nav-item" data-tab="explorar"><span class="emoji">🔍</span>Explorar</button>
+            <button class="nav-item" data-tab="fidelidade" onclick="showScreen('screen-fidelidade',{reset:true})"><span
+                class="emoji">💲</span>Fidelidade</button>
+            <button class="nav-item" data-tab="pedidos" style="position:relative;"><span
+                class="emoji">🧺</span>Pedidos<span class="nav-badge">1</span></button>
+          </nav>
+        </section>
+
+        <!-- ==================== DETALHE DO ESTABELECIMENTO (mesclado) ==================== -->
+        <section class="screen" id="screen-estabelecimento" data-tab="inicio">
+          <header class="app-header">
+            <button class="icon-btn" onclick="goBack()">←</button>
+            <button class="icon-btn" onclick="goHome()">🏠</button>
+            <div class="title-block">
+              <p class="screen-title" id="det-header-nome">Estabelecimento</p>
+              <p class="breadcrumb"><a onclick="goHome()">Início</a> / Estabelecimento</p>
+            </div>
+            <button class="fav-btn" id="det-fav" title="Adicionar aos favoritos" aria-pressed="false"
+              onclick="alternarFavorito()">♡</button>
+          </header>
+
+          <div class="app-content">
+            <div class="detail-hero" id="det-hero"></div>
+
+            <p class="detail-overline" id="det-categoria">CATEGORIA</p>
+            <div class="detail-title-row">
+              <h2 id="det-nome">Nome da Loja</h2>
+            </div>
+
+            <div class="detail-meta-row">
+              <span class="detail-rating" id="det-nota">⭐ 5,0</span>
+              <span class="detail-avaliacoes" id="det-avaliacoes">250 avaliações</span>
+              <span class="open-pill"><span class="bolinha"></span><span id="det-status">Aberto</span></span>
+            </div>
+
+            <div class="store-facts">
+              <div class="fact">
+                <b id="det-tempo">20 a 30 min</b>
+                <small>Tempo estimado</small>
+              </div>
+              <div class="fact">
+                <b id="det-taxa">R$ 3,00</b>
+                <small>Taxa de entrega</small>
+              </div>
+            </div>
+            <p class="data-note">Tempo e taxa podem variar conforme o endereço.</p>
+
+            <nav class="tabs">
+              <button class="tab" onclick="trocarAba('produtos', this)">Produtos</button>
+              <button class="tab" onclick="trocarAba('avaliacoes', this)">Avaliações</button>
+              <button class="tab active" onclick="trocarAba('info', this)">Informações</button>
+            </nav>
+
+            <!-- ABA: INFORMAÇÕES -->
+            <div class="tab-panel active" id="painel-info">
+
+              <div class="store-search">
+                🔍 <input type="text" id="busca-loja" placeholder="Buscar informação nesta loja..."
+                  oninput="filtrarInfo(this.value)">
+              </div>
+              <p class="search-hint">Digite uma palavra, como “horário”, “pagamento” ou “endereço”.</p>
+
+              <article class="info-card buscavel" data-busca="sobre a loja descrição produtos">
+                <div class="card-heading">
+                  <span class="icon-disc">🏪</span>
+                  <h3>Sobre a loja</h3>
+                </div>
+                <p class="description" id="det-sobre">Descrição da loja.</p>
+              </article>
+
+              <article class="info-card buscavel" data-busca="entrega taxa modalidade frete">
+                <div class="card-heading">
+                  <span class="icon-disc">🚚</span>
+                  <h3>Entrega</h3>
+                </div>
+                <div class="hours-row"><span>Modalidade</span><strong id="det-modalidade">Somente entrega</strong></div>
+                <div class="hours-row"><span>Taxa de entrega</span><strong id="det-taxa2">R$ 3,00</strong></div>
+              </article>
+
+              <article class="info-card buscavel" data-busca="horário horários funcionamento aberto fechado semana">
+                <div class="card-heading">
+                  <span class="icon-disc">🕐</span>
+                  <h3>Horário de funcionamento</h3>
+                </div>
+                <div class="hours-row"><span>Hoje</span><strong id="det-hoje">07:30 às 20:30</strong></div>
+                <button class="wide-action" onclick="abrirHorarios()">Ver horários da semana <span>→</span></button>
+              </article>
+
+              <article class="info-card buscavel" data-busca="pagamento formas pix cartão crédito débito dinheiro">
+                <button class="accordion-trigger" id="btn-pagamento" onclick="alternarPagamento()">
+                  <span class="card-heading" style="margin-bottom:0;">
+                    <span class="icon-disc">💳</span>
+                    <h3>Formas de pagamento</h3>
+                  </span>
+                  <span class="accordion-chevron">⌄</span>
+                </button>
+                <div class="payment-details" id="detalhes-pagamento" hidden>
+                  <p class="payment-group-title">Pelo aplicativo</p>
+                  <div id="det-pag-app"></div>
+                  <p class="payment-group-title">Na entrega</p>
+                  <div id="det-pag-entrega"></div>
+                </div>
+              </article>
+
+              <article class="info-card buscavel" data-busca="endereço localização mapa rota avenida rua centro">
+                <div class="card-heading">
+                  <span class="icon-disc">📍</span>
+                  <h3>Endereço</h3>
+                </div>
+                <p class="address" id="det-endereco">Endereço da loja.</p>
+                <button class="wide-action" onclick="verRota()">🗺️ Ver rota no mapa <span>↗</span></button>
+                <button class="copy-action" onclick="copiarEndereco()">📋 Copiar endereço</button>
+              </article>
+
+              <p class="search-hint" id="busca-vazia" style="display:none;text-align:center;">
+                Nenhuma informação encontrada para esse termo.
+              </p>
+            </div>
+
+            <!-- ABA: PRODUTOS -->
+            <div class="tab-panel" id="painel-produtos">
+              <div class="panel-vazio">
+                <div class="panel-symbol">🛒</div>
+                <h3>Produtos da loja</h3>
+                <p>O catálogo de produtos não faz parte do escopo avaliado neste protótipo.</p>
+              </div>
+            </div>
+
+            <!-- ABA: AVALIAÇÕES -->
+            <div class="tab-panel" id="painel-avaliacoes">
+              <div class="panel-vazio">
+                <div class="panel-symbol">⭐</div>
+                <h3>Avaliações</h3>
+                <p>As avaliações dos clientes não fazem parte do escopo avaliado neste protótipo.</p>
+              </div>
+            </div>
+          </div>
+
+          <nav class="bottom-nav">
+            <button class="nav-item active" data-tab="inicio" onclick="showScreen('screen-home',{reset:true})"><span
+                class="emoji">🏠</span>Início</button>
+            <button class="nav-item" data-tab="explorar"><span class="emoji">🔍</span>Explorar</button>
+            <button class="nav-item" data-tab="fidelidade" onclick="showScreen('screen-fidelidade',{reset:true})"><span
+                class="emoji">💲</span>Fidelidade</button>
+            <button class="nav-item" data-tab="pedidos"><span class="emoji">🧺</span>Pedidos<span
+                class="nav-badge">1</span></button>
+          </nav>
+        </section>
+
+        <!-- ==================== HORÁRIOS DA SEMANA ==================== -->
+        <section class="screen" id="screen-horarios" data-tab="inicio">
+          <header class="app-header">
+            <button class="icon-btn" onclick="goBack()">←</button>
+            <button class="icon-btn" onclick="goHome()">🏠</button>
+            <div class="title-block">
+              <p class="screen-title">Horários</p>
+              <p class="breadcrumb"><a onclick="goHome()">Início</a> / <a
+                  onclick="showScreen('screen-estabelecimento')">Estabelecimento</a> / Horários</p>
+            </div>
+          </header>
+          <div class="app-content">
+            <div class="horarios-destaque">
+              <div class="destaque-topo">
+                <div class="icone-relogio">🕐</div>
+                <span class="badge-semanal">● Funcionamento semanal</span>
+              </div>
+              <h3 id="hor-nome">Nome da Loja</h3>
+              <p>Planeje suas compras com tranquilidade.</p>
+              <div class="linha-destaque">
+                <span>Segunda a sexta</span>
+                <strong id="hor-semana">07:30 – 20:30</strong>
+              </div>
+            </div>
+
+            <div class="lista-horarios">
+              <h3>Todos os dias</h3>
+              <p class="descricao-horarios">Confira os horários de atendimento.</p>
+              <div id="hor-lista"></div>
+            </div>
+
+            <div class="aviso-horarios">
+              <span class="aviso-icone">i</span>
+              <p>Os horários podem sofrer alterações em feriados e datas especiais.</p>
+            </div>
+
+            <button class="btn-primary" onclick="goBack()">← Voltar para a loja</button>
+          </div>
+          <nav class="bottom-nav">
+            <button class="nav-item active" data-tab="inicio" onclick="showScreen('screen-home',{reset:true})"><span
+                class="emoji">🏠</span>Início</button>
+            <button class="nav-item" data-tab="explorar"><span class="emoji">🔍</span>Explorar</button>
+            <button class="nav-item" data-tab="fidelidade" onclick="showScreen('screen-fidelidade',{reset:true})"><span
+                class="emoji">💲</span>Fidelidade</button>
+            <button class="nav-item" data-tab="pedidos"><span class="emoji">🧺</span>Pedidos<span
+                class="nav-badge">1</span></button>
+          </nav>
+        </section>
+
+        <!-- ==================== MINHA CONTA ==================== -->
+        <section class="screen" id="screen-profile" data-tab="inicio">
+          <header class="app-header">
+            <button class="icon-btn" onclick="goBack()">←</button>
+            <div class="title-block">
+              <p class="screen-title">Minha Conta</p>
+            </div>
+            <button class="icon-btn" title="Sair" onclick="logout()">⎋</button>
+          </header>
+          <div class="app-content">
+            <p style="font-size:13px;color:var(--muted);margin:0;">Bem-vindo</p>
+            <p style="font-weight:800;font-size:16px;margin:2px 0 14px;">Alex Almeida</p>
+
+            <div class="list-row" onclick="emConstrucao()">
+              <div class="row-left">✏️ Editar Conta</div><span class="chevron">›</span>
+            </div>
+            <div class="list-row" onclick="emConstrucao()">
+              <div class="row-left">📍 Meus Endereços</div><span class="chevron">›</span>
+            </div>
+            <div class="list-row" onclick="showScreen('screen-fidelidade')">
+              <div class="row-left">💲 Programas de Fidelidade</div><span class="chevron">›</span>
+            </div>
+            <div class="list-row" onclick="emConstrucao()">
+              <div class="row-left">❤️ Meus Favoritos</div><span class="chevron">›</span>
+            </div>
+            <div class="list-row" onclick="emConstrucao()">
+              <div class="row-left">🎧 Fale Conosco</div><span class="chevron">›</span>
+            </div>
+            <div class="list-row" onclick="emConstrucao()">
+              <div class="row-left">🏪 Sugerir Estabelecimentos</div><span class="chevron">›</span>
+            </div>
+            <div class="list-row" onclick="emConstrucao()">
+              <div class="row-left">➕ Seja um Estabelecimento Parceiro</div><span class="chevron">›</span>
+            </div>
+            <div class="list-row" onclick="emConstrucao()">
+              <div class="row-left">🏍️ Seja um Entregador do APP</div><span class="chevron">›</span>
+            </div>
+
+            <div class="empty-state" style="margin-top:24px;">Mais<span style="color:var(--primary);">+</span> Quero ser
+              um franqueado Mais Delivery!</div>
+          </div>
+          <nav class="bottom-nav">
+            <button class="nav-item" data-tab="inicio" onclick="showScreen('screen-home',{reset:true})"><span
+                class="emoji">🏠</span>Início</button>
+            <button class="nav-item" data-tab="explorar"><span class="emoji">🔍</span>Explorar</button>
+            <button class="nav-item" data-tab="fidelidade" onclick="showScreen('screen-fidelidade',{reset:true})"><span
+                class="emoji">💲</span>Fidelidade</button>
+            <button class="nav-item" data-tab="pedidos"><span class="emoji">🧺</span>Pedidos<span
+                class="nav-badge">1</span></button>
+          </nav>
+        </section>
+
+        <!-- ==================== FIDELIDADE (hub) ==================== -->
+        <section class="screen" id="screen-fidelidade" data-tab="fidelidade">
+          <header class="app-header">
+            <button class="icon-btn" onclick="goBack()">←</button>
+            <button class="icon-btn" title="Início" onclick="goHome()">🏠</button>
+            <div class="title-block">
+              <p class="screen-title">Programas de Fidelidade</p>
+            </div>
+            <button class="icon-btn" onclick="showScreen('screen-profile')">👤 <br><span
+                style="font-size:9px;">Minha Conta</span></button>
+          </header>
+          <div class="app-content">
+            <div class="list-row" onclick="showScreen('screen-cashback')">
+              <div class="row-left">💰 CashBack</div><span class="chevron">›</span>
+            </div>
+            <div class="list-row bloqueado" onclick="avisarIndiqueGanhe()">
+              <div class="row-left">➕ Indique e Ganhe</div><i class="bi bi-lock lock-icon"></i>
+            </div>
+            <div class="list-row" onclick="showScreen('screen-gamificacao')">
+              <div class="row-left">🎰 Prêmios da Gamificação</div><span class="chevron">›</span>
+            </div>
+            <div class="list-row" onclick="showScreen('screen-pedido-premiado')">
+              <div class="row-left">🏅 Pedido Premiado</div><span class="chevron">›</span>
+            </div>
+            <div class="list-row bloqueado" onclick="avisarCadastroPremiado()">
+              <div class="row-left">🧑 Cadastro Premiado</div><i class="bi bi-lock lock-icon"></i>
+            </div>
+            <div class="list-row" onclick="abrirGrupoCupons()">
+              <div class="row-left">💬 Grupo com cupons e promoções</div><span class="chevron">›</span>
+            </div>
+            <div class="list-row" onclick="openModal('modal-extrato')">
+              <div class="row-left">💳 Extrato da Conta</div><span class="chevron">›</span>
+            </div>
+          </div>
+          <nav class="bottom-nav">
+            <button class="nav-item" data-tab="inicio" onclick="showScreen('screen-home',{reset:true})"><span
+                class="emoji">🏠</span>Início</button>
+            <button class="nav-item" data-tab="explorar"><span class="emoji">🔍</span>Explorar</button>
+            <button class="nav-item active" data-tab="fidelidade"
+              onclick="showScreen('screen-fidelidade',{reset:true})"><span class="emoji">💲</span>Fidelidade</button>
+            <button class="nav-item" data-tab="pedidos"><span class="emoji">🧺</span>Pedidos<span
+                class="nav-badge">1</span></button>
+          </nav>
+        </section>
+
+        <!-- ==================== CASHBACK ==================== -->
+        <section class="screen" id="screen-cashback" data-tab="fidelidade">
+          <header class="app-header">
+            <button class="icon-btn" onclick="goBack()">←</button>
+            <button class="icon-btn" onclick="goHome()">🏠</button>
+            <div class="title-block">
+              <p class="screen-title">CashBack</p>
+              <p class="breadcrumb"><a onclick="showScreen('screen-fidelidade')">Fidelidade</a> / CashBack</p>
+            </div>
+          </header>
+          <div class="app-content">
+            <div class="banner-box">💳 CASH<br>BACK</div>
+            <p class="info-text">Ao utilizar nosso app, você não apenas adquire produtos e serviços excepcionais, mas
+              também recebe <b>1,00%</b> de Cashback no extrato da sua conta após a entrega do seu pedido.</p>
+            <p class="info-text">Valor mínimo para resgate: <b>R$ 0,00</b> · Valor máximo: <b>R$ 0,00</b></p>
+
+            <button class="btn-outline-small" onclick="openModal('modal-estabelecimentos')">🏪 Ver Estabelecimentos
+              Participantes <span>›</span></button>
+            <button class="btn-outline-small" onclick="openModal('modal-formas-pagamento')">💳 Ver Formas de Pagamento
+              (acumular e resgatar) <span>›</span></button>
+            <button class="btn-primary" onclick="openModal('modal-extrato')">EXTRATO DA CONTA</button>
+          </div>
+          <nav class="bottom-nav">
+            <button class="nav-item" data-tab="inicio" onclick="showScreen('screen-home',{reset:true})"><span
+                class="emoji">🏠</span>Início</button>
+            <button class="nav-item" data-tab="explorar"><span class="emoji">🔍</span>Explorar</button>
+            <button class="nav-item active" data-tab="fidelidade"
+              onclick="showScreen('screen-fidelidade',{reset:true})"><span class="emoji">💲</span>Fidelidade</button>
+            <button class="nav-item" data-tab="pedidos"><span class="emoji">🧺</span>Pedidos<span
+                class="nav-badge">1</span></button>
+          </nav>
+        </section>
+
+        <!-- ==================== GAMIFICAÇÃO ==================== -->
+        <section class="screen" id="screen-gamificacao" data-tab="fidelidade">
+          <header class="app-header">
+            <button class="icon-btn" onclick="goBack()">←</button>
+            <button class="icon-btn" onclick="goHome()">🏠</button>
+            <div class="title-block">
+              <p class="screen-title">Prêmios da Gamificação</p>
+              <p class="breadcrumb"><a onclick="showScreen('screen-fidelidade')">Fidelidade</a> / Gamificação</p>
+            </div>
+          </header>
+          <div class="app-content">
+            <div class="empty-state">🎰 Você não ganhou nenhum prêmio ainda!</div>
+          </div>
+          <nav class="bottom-nav">
+            <button class="nav-item" data-tab="inicio" onclick="showScreen('screen-home',{reset:true})"><span
+                class="emoji">🏠</span>Início</button>
+            <button class="nav-item" data-tab="explorar"><span class="emoji">🔍</span>Explorar</button>
+            <button class="nav-item active" data-tab="fidelidade"
+              onclick="showScreen('screen-fidelidade',{reset:true})"><span class="emoji">💲</span>Fidelidade</button>
+            <button class="nav-item" data-tab="pedidos"><span class="emoji">🧺</span>Pedidos<span
+                class="nav-badge">1</span></button>
+          </nav>
+        </section>
+
+        <!-- ==================== PEDIDO PREMIADO ==================== -->
+        <section class="screen" id="screen-pedido-premiado" data-tab="fidelidade">
+          <header class="app-header">
+            <button class="icon-btn" onclick="goBack()">←</button>
+            <button class="icon-btn" onclick="goHome()">🏠</button>
+            <div class="title-block">
+              <p class="screen-title">Pedido Premiado</p>
+              <p class="breadcrumb"><a onclick="showScreen('screen-fidelidade')">Fidelidade</a> / Pedido Premiado</p>
+            </div>
+          </header>
+          <div class="app-content">
+            <div class="banner-box">🏅 PEDIDO<br>PREMIADO</div>
+            <p class="info-text">✨ <b>Jô Cosméticos Pedido Premiado</b> ✨</p>
+            <p class="info-text">Todo pedido acima de <b>R$ 10,00</b> feito pelo app Mais Delivery equivale a 1 cupom
+              para concorrer a todos os prêmios.</p>
+            <p class="info-text">📅 Período: <b>01/10/2026</b> a <b>16/10/2026</b> · Sorteio: <b>17/10/2026 às 15h</b>
+            </p>
+
+            <button class="btn-outline-small" onclick="openModal('modal-premios')">🎁 Ver meus Prêmios
+              <span>›</span></button>
+            <button class="btn-outline-small" onclick="openModal('modal-pedidos')">🧾 Ver meus Pedidos concorrendo
+              <span>›</span></button>
+            <button class="btn-outline-small" onclick="openModal('modal-live')">🔴 Assistir a Live do sorteio
+              <span>›</span></button>
+          </div>
+          <nav class="bottom-nav">
+            <button class="nav-item" data-tab="inicio" onclick="showScreen('screen-home',{reset:true})"><span
+                class="emoji">🏠</span>Início</button>
+            <button class="nav-item" data-tab="explorar"><span class="emoji">🔍</span>Explorar</button>
+            <button class="nav-item active" data-tab="fidelidade"
+              onclick="showScreen('screen-fidelidade',{reset:true})"><span class="emoji">💲</span>Fidelidade</button>
+            <button class="nav-item" data-tab="pedidos"><span class="emoji">🧺</span>Pedidos<span
+                class="nav-badge">1</span></button>
+          </nav>
+        </section>
+
+        <!-- ==================== MODAIS ==================== -->
+        <div class="modal-overlay" id="modal-estabelecimentos">
+          <div class="modal-card">
+            <div class="modal-close-row"><button onclick="closeModal('modal-estabelecimentos')">Fechar ✕</button></div>
+            <h3>Estabelecimentos Participantes</h3>
+            <div class="list-row">
+              <div class="row-left">🍗 Aí Que Fome</div>
+            </div>
+            <div class="list-row">
+              <div class="row-left">🥤 Aldeia do Suco</div>
+            </div>
+            <div class="list-row">
+              <div class="row-left">🥩 Casa de Carnes 2 Irmãos</div>
+            </div>
+            <div class="list-row">
+              <div class="row-left">🍰 Confeitaria Gourmet JT</div>
+            </div>
+            <div class="list-row">
+              <div class="row-left">🍪 Cookies da Jô</div>
+            </div>
+            <div class="list-row">
+              <div class="row-left">🍢 Déia Espetinho e Cia</div>
+            </div>
+            <div class="list-row" style="border-bottom:none;">
+              <div class="row-left">🍨 Delícias Gelada Gourmet</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-overlay" id="modal-formas-pagamento">
+          <div class="modal-card">
+            <div class="modal-close-row"><button onclick="closeModal('modal-formas-pagamento')">Fechar ✕</button></div>
+            <h3>Formas de Pagamento</h3>
+            <p class="payment-group-title">Para Acumular / Resgatar</p>
+            <div class="payment-item"><span class="dot"></span>Cartão de Crédito (maquininha)</div>
+            <div class="payment-item"><span class="dot"></span>Cartão de Débito (maquininha)</div>
+            <div class="payment-item"><span class="dot"></span>Dinheiro</div>
+            <div class="payment-item"><span class="dot"></span>PIX no App (online)</div>
+            <div class="payment-item"><span class="dot"></span>PIX QR Code (maquininha)</div>
+            <div class="payment-item"><span class="dot"></span>Cartão de Crédito no App (online)</div>
+            <div class="payment-item" style="border-bottom:none;"><span class="dot"></span>Pagamento no Balcão</div>
+          </div>
+        </div>
+
+        <div class="modal-overlay" id="modal-extrato">
+          <div class="modal-card">
+            <div class="modal-close-row"><button onclick="closeModal('modal-extrato')">Fechar ✕</button></div>
+            <h3>Extrato CashBack</h3>
+            <div class="empty-state">
+              ℹ️ <b>Atenção</b><br>Não existem movimentações na sua conta ainda.
+              <button class="btn-primary" onclick="closeModal('modal-extrato')">OK</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-overlay" id="modal-premios">
+          <div class="modal-card">
+            <div class="modal-close-row"><button onclick="closeModal('modal-premios')">Fechar ✕</button></div>
+            <h3>Prêmios</h3>
+            <div class="list-row" style="border-bottom:none;">
+              <div class="row-left">1) R$ 50,00 no PIX</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-overlay" id="modal-pedidos">
+          <div class="modal-card">
+            <div class="modal-close-row"><button onclick="closeModal('modal-pedidos')">Fechar ✕</button></div>
+            <h3>Pedidos Concorrendo</h3>
+            <div class="empty-state">
+              ℹ️ <b>Atenção!</b><br>Sua conta ainda não tem nenhum pedido concorrendo.
+              <button class="btn-primary" onclick="girarAgora()">QUERO GIRAR AGORA</button>
+              <button class="btn-secondary" onclick="closeModal('modal-pedidos')">NÃO QUERO</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live do sorteio com lista de ganhadores (correção Fase 6) -->
+        <div class="modal-overlay" id="modal-live">
+          <div class="modal-card">
+            <div class="modal-close-row"><button onclick="closeModal('modal-live')">Fechar ✕</button></div>
+            <h3>Assistir a Live</h3>
+            <p class="info-text"><b>Ops! A live do sorteio já ocorreu.</b></p>
+            <p class="info-text">Veja abaixo os ganhadores do sorteio e seus respectivos prêmios:</p>
+
+            <table class="winners-table">
+              <tr>
+                <th>Ganhador</th>
+                <th>Nº do Cupom</th>
+                <th>Prêmio</th>
+                <th>Data</th>
+              </tr>
+              <tr>
+                <td>João da Silva</td>
+                <td>0042</td>
+                <td>R$ 50,00 no PIX</td>
+                <td>17/10/2026</td>
+              </tr>
+              <tr>
+                <td>Maria Luiza Souza</td>
+                <td>0101</td>
+                <td>R$ 50,00 no PIX</td>
+                <td>17/10/2026</td>
+              </tr>
+            </table>
+
+            <p class="info-text" style="text-align:center;">Caso queira mais detalhes sobre o sorteio, acesse nosso
+              perfil no Instagram:<br>
+              <span class="link-insta" onclick="verInstagram()">@maisdeliveryburitialegre</span>
+            </p>
+            <button class="btn-primary" onclick="closeModal('modal-live')">OK</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
